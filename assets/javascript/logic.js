@@ -85,13 +85,12 @@ function zomatoGetRestaurants(a) {//this function is called by zomatoGetCity wit
             var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';//labels array to be displayed on entities in the google map
             var labelIndex = 0;//counter variable that will loop through the labels array
             $("#table-head").empty();//clearing all column titles from the html table 
-            $("#table-head").append("<th scope='col'>Map</th><th scope='col'>Restaurant Name</th><th scope='col'>Type</th><th scope='col'>Rating</th><th scope='col'>More Info</th><th scope='col'>Favorite</th>");//creating the column headings for diplaying restaurants
+            $("#table-head").append("<th scope='col'>Map</th><th scope='col'>Restaurant Name</th><th scope='col'>Type</th><th scope='col'>Rating</th><th scope='col'>More Info</th>");//creating the column headings for diplaying restaurants
             $("#table-body").empty();//clearing the main contents of the table so that new information can be added
             for (var i = 0; i < z.length; i++) {//each time this loop iterates a new table row will be created and appended with restaurant information captured from the api
                 $("#table-body").append("<tr>" + "<td>" + labels[labelIndex] + "</td><td>" + z[i].restaurant.name + "</td><td>" + z[i].restaurant.cuisines + "</td><td>"
                     + z[i].restaurant.user_rating.aggregate_rating + "</td><td><button type='button' class='btn btn-success zomato' data-toggle='modal' data-target='exampleModal' id="
-                    + z[i].restaurant.id + ">More Info</button></td><td><button type='button' class='btn btn-warning fav-zomato' id="
-                    + z[i].restaurant.id + ">Add To Favorites</button></td></tr>");
+                    + z[i].restaurant.id + ">More Info</button></td></tr>");
                 var myLatLng = new google.maps.LatLng(z[i].restaurant.location.latitude, z[i].restaurant.location.longitude);//this variable saves the lat and long of each restaurant fetched by the api call
                 var marker = new google.maps.Marker({//marker creates a new pinpoint on the google map for the given restauarant
                     position: myLatLng,
@@ -148,12 +147,12 @@ function getZomatoReviews(a) { // this function will get called on click of the 
     });
 }
 
-function addFavRestaurant() {//this function deals with adding a rstaurant id to the firebase server which can be called later to display the restaurants that have been favorited
+/*function addFavRestaurant() {//this function deals with adding a rstaurant id to the firebase server which can be called later to display the restaurants that have been favorited
     var id = $(this).attr('id');
     database.ref("/Restaurants/").push({
         id: id
     });
-}
+}*/
 function zomatoModal(e) {//this function happens when then "more info" button is clicked and the pop up modal is displayed on the screen
     var id = $(this).attr('id');//capturing the id of a given restaurant so that another ajax call can be made to get more specific details of that restaurant
     $.ajax({
@@ -242,13 +241,12 @@ function ticketMaster(e) {
                 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';//google maps labels array and index below
                 var labelIndex = 0;
                 $("#table-head").empty();//Need to clear the table column headings so that they can be specified for ticketmaster
-                $("#table-head").append("<th scope='col'>Map</th><th scope='col'>Event Name</th><th scope='col'>Date</th><th scope='col'>Time</th><th scope='col'>More Info</th><th scope='col'>Favorite</th>")//creates the ticketmaster events column headings
+                $("#table-head").append("<th scope='col'>Map</th><th scope='col'>Event Name</th><th scope='col'>Date</th><th scope='col'>Time</th><th scope='col'>More Info</th>")//creates the ticketmaster events column headings
                 $("#table-body").empty();//clearing the table body so that we can add rows of information specific to the ticket master events captured by the api
                 for (var i = 0; i < tm.length; i++) {//for loop similar to the zomatoGetRestaurants (see line 72)
                     $("#table-body").append("<tr>" + "<td>" + labels[labelIndex] + "</td><td>" + tm[i].name + "</td><td>" + moment(tm[i].dates.start.localDate).format('MMM Do YYYY') + "</td><td>"
                         + moment(tm[i].dates.start.localTime, 'HH:mm:ss').format('h:mm a') + "</td><td><button type='button' class='btn btn-success ticket' data-toggle='modal' data-target='exampleModal' id="
-                        + tm[i].id + ">More Info</button></td><td><button type='button' class='btn btn-warning fav-ticket' id="
-                        + tm[i].id + ">Add To Favorites</button></td></tr>");
+                        + tm[i].id + ">More Info</button></td></tr>");
                     var myLatLng = new google.maps.LatLng(tm[i]._embedded.venues[0].location.latitude, tm[i]._embedded.venues[0].location.longitude);//same google maps calls(could be refactored)
                     var marker = new google.maps.Marker({
                         animation: google.maps.Animation.DROP,
@@ -263,12 +261,12 @@ function ticketMaster(e) {
         });
     } e.preventDefault();
 }
-function addFavEvent() {//adding the ticket master event id's to the firebase server when the user clicks add to favorites
+/*function addFavEvent() {//adding the ticket master event id's to the firebase server when the user clicks add to favorites
     var id = $(this).attr('id');
     database.ref("/Events/").push({
         id: id
     });
-}
+}*/
 function ticketMasterModal(e) {//this function works very similiarly to the zomatoModal function ( see zomatoModal(e) )--line 97
     var id = $(this).attr('id');
     console.log(id);
