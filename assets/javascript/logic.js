@@ -139,9 +139,9 @@ function getZomatoReviews(a) { // this function will get called on click of the 
         success: function (data) {
             var reviews = data.user_reviews;
             $(".modal-body").append("<table class='table'><thead><tr id='review-list-head'></tr></thead><tbody id='review-list-body'></tbody></table>");
-            $("#review-list-head").append("<th scope='col'></th><th scope='col'>UserName</th><th scope='col'>Ratings</th><th scope='col'>Reviews</th>");
+            $("#review-list-head").append("<th scope='col'>UserName</th><th scope='col'>Ratings</th><th scope='col'>Reviews</th>");
             for (var i = 0; i < reviews.length; i++) {
-                $("#review-list-body").append("<tr><td><img src=" + reviews[i].review.user.profile_image + "</td><td>" + reviews[i].review.user.name + "</td>" + "<td>" + reviews[i].review.rating + "</td><td>" + reviews[i].review.review_text + "</td><td>");
+                $("#review-list-body").append("<tr><td>" + reviews[i].review.user.name + "</td>" + "<td>" + reviews[i].review.rating + "</td><td>" + reviews[i].review.review_text + "</td><td>");
             }
         }
     });
@@ -169,7 +169,6 @@ function zomatoModal(e) {//this function happens when then "more info" button is
             var modalImage = $("<img><br>")//this creates a variable that will hold an html image
             modalImage.attr("src", z.featured_image);//setting the attribute of src to the image with the image url provided in the zomato api
             modalImage.attr("height", "200px");//constricting the image to a height of 200px(can be changed when we swtich to the larger modal format)
-            modalImage.attr("style","margin-left:25%");
             modalPhone = $("<h5 style='text-align:center'>");//this creates an html <h5> text object that will be center aligned
             modalAddress = $("<h5 style='text-align:center'>");
             modalAddress.text(z.location.address);//setting the text of this html <h5> to include the address of the restaurant that is targeted by clicking "more info"
@@ -281,7 +280,6 @@ function ticketMasterModal(e) {//this function works very similiarly to the zoma
             var modalImage = $("<img><br>")
             modalImage.attr("src", tm.images[1].url);
             modalImage.attr("height", "200px");
-            modalImage.attr("style","margin-left:25%");
             modalVenue = $("<br><br><h5 style='text-align:center'></h5><br>");
             modalVenue.text(tm._embedded.venues[0].name);
             $(".modal-body").append(modalImage);
@@ -354,7 +352,7 @@ function openBreweryDB(e) {
 
         $.ajax({// this ajax call uses the openbrewerydb database to search for breweries by city name- returns 26 results (no problems with a-z on map display, can display up to 50 at a time)
             type: "GET",
-            url: "https://api.openbrewerydb.org/breweries?by_city=" + city + "&per_page=22",
+            url: "https://api.openbrewerydb.org/breweries?by_city=" + city + "&per_page=30",
             async: true,
             dataType: "json",
             success: function (data) {
@@ -363,14 +361,12 @@ function openBreweryDB(e) {
                 var labelIndex = 0;
                 $("#table-head").empty();//Need to clear the table column headings so that they can be specified for breweriesa
                 $("#table-body").empty();
-                $("#table-head").append("<th scope='col'>Map</th><th scope='col'>Brewery Name</th><th scope='col'>Type</th><th scope='col'>Address</th><th scope='col'>More Info</th><th scope='col'></th>")
+                $("#table-head").append("<th scope='col'>Map</th><th scope='col'>Brewery Name</th><th scope='col'>Address</th><th scope='col'>More Info</th>")
                 for (var i = 0; i < ob.length; i++) {
                     var name = ob[i].name;//this captures the name of each specific brewery in a given city
                     var urlName = name.split(' ').join('+');//this variable is needed for the getBrewId function and is saved as an id in a button that is created in each row of the table created below
                     console.log(urlName);
-                    $("#table-body").append("<tr>" + "<td>" + labels[labelIndex] + "</td><td>" + ob[i].name + "</td><td>" + ob[i].brewery_type + "</td><td>"
-                        + ob[i].street + "</td><td><button type='button' class='btn btn-success brewery' data-toggle='modal' data-target='exampleModal' id="
-                        + urlName + ">More Info</button></td></tr>");
+                    $("#table-body").append("<tr>" + "<td>" + labels[labelIndex] + "</td><td>" + ob[i].name + "</td><td>" + ob[i].street + "</td><td><button type='button' class='btn btn-success brewery' data-toggle='modal' data-target='exampleModal' id=" + urlName + ">More Info</button></td></tr>");
                     var myLatLng = new google.maps.LatLng(ob[i].latitude, ob[i].longitude);//google maps coordinates
                     var marker = new google.maps.Marker({//google maps place of interest markers
                         animation: google.maps.Animation.DROP,
@@ -435,10 +431,9 @@ function breweryModal(e) {
                 $(".modal-body").append("<h2 style='text-align:center;font-weight:bold'>BEER LIST NOT AVAILABLE</h2>");
             } else {
                 $(".modal-body").append("<table class='table'><thead><tr id='beer-list-head'></tr></thead><tbody id='beer-list-body'></tbody></table>");
-                $("#beer-list-head").append("<th scope='col'></th><th scope='col'>Beer Name</th><th scope='col'>Style</th><th scope='col'>Description</th>");
+                $("#beer-list-head").append("<th scope='col'></th><th scope='col'>Beer Name</th><th scope='col'>Style</th>");
                 for (var i = 0; i < untap.beer_list.items.length; i++) {
-                    $("#beer-list-body").append("<tr><td><img src=" + untap.beer_list.items[i].beer.beer_label + "></td><td>" + untap.beer_list.items[i].beer.beer_name + "</td><td>" + untap.beer_list.items[i].beer.beer_style + "</td><td>"
-                        + untap.beer_list.items[i].beer.beer_description + "</td></tr>");
+                    $("#beer-list-body").append("<tr><td><img src=" + untap.beer_list.items[i].beer.beer_label + "></td><td>" + untap.beer_list.items[i].beer.beer_name + "</td><td>" + untap.beer_list.items[i].beer.beer_style + "</td></tr>");
                 }
             }
             $("#exampleModalLabel").text(untap.brewery_name);
@@ -457,8 +452,8 @@ $("#ob-button").on("click", openBreweryDB);
 //These calls are formatted this way because these buttons are not loaded in the html document on start - they are dynamically created
 $(document).on("click", ".ticket", ticketMasterModal);
 $(document).on("click", ".zomato", zomatoModal);
-$(document).on("click", ".fav-zomato", addFavRestaurant);
-$(document).on("click", ".fav-ticket", addFavEvent);
+//$(document).on("click", ".fav-zomato", addFavRestaurant);
+//$(document).on("click", ".fav-ticket", addFavEvent);
 $(document).on("click", ".brewery", getBrewID);
 $(document).on("click", ".ticket-button", function () {
     console.log($(this).attr('id'));
