@@ -352,7 +352,7 @@ function openBreweryDB(e) {
 
         $.ajax({// this ajax call uses the openbrewerydb database to search for breweries by city name- returns 26 results (no problems with a-z on map display, can display up to 50 at a time)
             type: "GET",
-            url: "https://api.openbrewerydb.org/breweries?by_city=" + city + "&per_page=30",
+            url: "https://api.openbrewerydb.org/breweries?by_city=" + city + "&per_page=26",
             async: true,
             dataType: "json",
             success: function (data) {
@@ -422,7 +422,6 @@ function breweryModal(e) {
             var modalImage = $("<img><br>")
             modalImage.attr("src", untap.brewery_label);
             modalImage.attr("height", "300px");
-            modalImage.attr("style","margin-left:25%");
             $(".modal-body").append(modalImage);
             modalDescription = $("<br><h5 style='text-align:center'></h5><br><br>");
             modalDescription.text(untap.brewery_description);
@@ -433,7 +432,7 @@ function breweryModal(e) {
                 $(".modal-body").append("<table class='table'><thead><tr id='beer-list-head'></tr></thead><tbody id='beer-list-body'></tbody></table>");
                 $("#beer-list-head").append("<th scope='col'></th><th scope='col'>Beer Name</th><th scope='col'>Style</th>");
                 for (var i = 0; i < untap.beer_list.items.length; i++) {
-                    $("#beer-list-body").append("<tr><td><img src=" + untap.beer_list.items[i].beer.beer_label + "></td><td>" + untap.beer_list.items[i].beer.beer_name + "</td><td>" + untap.beer_list.items[i].beer.beer_style + "</td></tr>");
+                    $("#beer-list-body").append("<tr><td><img src=" + untap.beer_list.items[i].beer.beer_label +" height='50px'></td><td>" + untap.beer_list.items[i].beer.beer_name + "</td><td>" + untap.beer_list.items[i].beer.beer_style + "</td></tr>");
                 }
             }
             $("#exampleModalLabel").text(untap.brewery_name);
