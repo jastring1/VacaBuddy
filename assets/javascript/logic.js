@@ -1,17 +1,5 @@
 var maplocation; // global variable to hold latitude and longitude for setting the map to selected city
 var map; //google map object
-var config = {//credentials for the firebase server
-    apiKey: "AIzaSyDYVNJ-Ggov5htghQ-BkNxOBcG3c6SfULU",
-    authDomain: "bootcamp-example-8f83a.firebaseapp.com",
-    databaseURL: "https://bootcamp-example-8f83a.firebaseio.com",
-    projectId: "bootcamp-example-8f83a",
-    storageBucket: "",
-    messagingSenderId: "570706840985",
-    appId: "1:570706840985:web:66af9a4c6d8e3d14"
-};
-firebase.initializeApp(config);//initalializing the firebase server
-var database = firebase.database();//creating database object to add and make changes to the firebase server
-
 function zomatoGetCity(e) {//function that querys the zomato api to search for the city from the users destination input and set the map location
     var city = $("#destination-input").val().trim();
     if (city == '') {
@@ -146,13 +134,6 @@ function getZomatoReviews(a) { // this function will get called on click of the 
         }
     });
 }
-
-/*function addFavRestaurant() {//this function deals with adding a rstaurant id to the firebase server which can be called later to display the restaurants that have been favorited
-    var id = $(this).attr('id');
-    database.ref("/Restaurants/").push({
-        id: id
-    });
-}*/
 function zomatoModal(e) {//this function happens when then "more info" button is clicked and the pop up modal is displayed on the screen
     var id = $(this).attr('id');//capturing the id of a given restaurant so that another ajax call can be made to get more specific details of that restaurant
     $.ajax({
@@ -243,7 +224,7 @@ function ticketMaster(e) {
                 $("#table-head").append("<th scope='col'>Map</th><th scope='col'>Event Name</th><th scope='col'>Date</th><th scope='col'>Time</th><th scope='col'>More Info</th>")//creates the ticketmaster events column headings
                 $("#table-body").empty();//clearing the table body so that we can add rows of information specific to the ticket master events captured by the api
                 for (var i = 0; i < tm.length; i++) {//for loop similar to the zomatoGetRestaurants (see line 72)
-                    $("#table-body").append("<tr>" + "<td>" + labels[labelIndex] + "</td><td>" + tm[i].name + "</td><td>" + moment(tm[i].dates.start.localDate).format('MMM Do YYYY') + "</td><td>"
+                    $("#table-body").append("<tr>" + "<td>" + labels[labelIndex] + "</td><td>" + tm[i].name + "</td><td>" + moment(tm[i].dates.start.localDate).format('MMM Do') + "</td><td>"
                         + moment(tm[i].dates.start.localTime, 'HH:mm:ss').format('h:mm a') + "</td><td><button type='button' class='btn btn-success ticket' data-toggle='modal' data-target='exampleModal' id="
                         + tm[i].id + ">More Info</button></td></tr>");
                     var myLatLng = new google.maps.LatLng(tm[i]._embedded.venues[0].location.latitude, tm[i]._embedded.venues[0].location.longitude);//same google maps calls(could be refactored)
@@ -260,12 +241,7 @@ function ticketMaster(e) {
         });
     } e.preventDefault();
 }
-/*function addFavEvent() {//adding the ticket master event id's to the firebase server when the user clicks add to favorites
-    var id = $(this).attr('id');
-    database.ref("/Events/").push({
-        id: id
-    });
-}*/
+
 function ticketMasterModal(e) {//this function works very similiarly to the zomatoModal function ( see zomatoModal(e) )--line 97
     var id = $(this).attr('id');
     console.log(id);
@@ -429,6 +405,7 @@ function breweryModal(e) {
             if (untap.beer_list.items.length === 0) {
                 $(".modal-body").append("<h2 style='text-align:center;font-weight:bold'>BEER LIST NOT AVAILABLE</h2>");
             } else {
+                $(".modal-body").append("<h2 style='text-align:center;font-weight:bold'>Current Beer List</h2><br>");
                 $(".modal-body").append("<table class='table'><thead><tr id='beer-list-head'></tr></thead><tbody id='beer-list-body'></tbody></table>");
                 $("#beer-list-head").append("<th scope='col'></th><th scope='col'>Beer Name</th><th scope='col'>Style</th>");
                 for (var i = 0; i < untap.beer_list.items.length; i++) {
@@ -451,8 +428,6 @@ $("#ob-button").on("click", openBreweryDB);
 //These calls are formatted this way because these buttons are not loaded in the html document on start - they are dynamically created
 $(document).on("click", ".ticket", ticketMasterModal);
 $(document).on("click", ".zomato", zomatoModal);
-//$(document).on("click", ".fav-zomato", addFavRestaurant);
-//$(document).on("click", ".fav-ticket", addFavEvent);
 $(document).on("click", ".brewery", getBrewID);
 $(document).on("click", ".ticket-button", function () {
     console.log($(this).attr('id'));
