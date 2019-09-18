@@ -4,6 +4,7 @@ Tripp Stringfield
 Vacabuddy is a web application that allows a user to search for information based on Cities
 
 This application is written with:
+
 -HTML5
 -BootStrap4
 -Javascript
@@ -11,31 +12,37 @@ This application is written with:
 -API services (Zomato, TicketMaster, OpenBreweryDB, Untappd, Google Maps)
 
 The application propmts a user for 3 Input fields:
+
 -City
 -Date of Arrival
 -Date of Departure
 
 Once the user completes the form they have 3 search areas to explore:
+
 -Restaurants
 -Events
 -Breweries
 
 ----Restaurants----
+
 The Zomato API will return the 20 most trending restaurants for a given city
 Google maps will display the city on a map and add markers for each of the returned restuarants
 The table below the map will provide the user with:
+
 -The name
 -The type of cuisines served
 -Overall Rating
 -More Info
 
 When the more info button is selected, a modal will pop up and give the user access to:
+
 -A photo from the restaurant
 -The phone number
 -The address
 -A list of the 5 most relevant reviews available
 
 ----Events----
+
 The Ticketmaster API will return a list of events in the city captured from the form, in the date ranges 
 that have been given by the user
 Google Maps will redraw the markers on the map to show the user where these events are taking place
@@ -53,9 +60,11 @@ The name of the team/performer
 -A link that will land the user on the page to purchase tickets for the event
 
 ----Breweries----
+
 OpenBreweryDB provides the list of breweries determined by the users input
 Google maps will redraw markers for these entities
 The table below the map will provide the user with:
+
 -The name of the breweries
 -The type of brewery
 -The address of the brewery
@@ -63,6 +72,7 @@ The table below the map will provide the user with:
 
 When the More Info button is selected, the Untappd API will search for the brewery by Name
 If a brewery is returned from the API call the user will be provided with:
+
 -The Brewery's Logo
 -A phone number
 -The Address
