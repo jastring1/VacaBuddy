@@ -1,36 +1,76 @@
-/////////////////////////////////////////////////////////////////////////////////////
+# VacaBuddy
+Tripp Stringfield
 
-API INFORMATION AND KEYS
+Vacabuddy is a web application that allows a user to search for information based on Cities
 
-//////////////////////////////////////////////////////////////////////////////////////
+This application is written with:
+-HTML5
+-BootStrap4
+-Javascript
+-JQuery
+-API services (Zomato, TicketMaster, OpenBreweryDB, Untappd, Google Maps)
 
-Yelp
+The application propmts a user for 3 Input fields:
+-City
+-Date of Arrival
+-Date of Departure
 
-Client ID
-6PhC44D0_SBF4VB4UmfwkQ
+Once the user completes the form they have 3 search areas to explore:
+-Restaurants
+-Events
+-Breweries
 
-API Key
-bED8DIIQtnedRwNryucgiO2M8Ooltx5Dec7RNznmzoYaZvck1rSakCYTPXftYoH26gZtt66KyD4E_cgiV7H7pXwzj6gFitOQkpTx96ZqysU9AQnj2f6M1yIuIdtmXXYx
+----Restaurants----
+The Zomato API will return the 20 most trending restaurants for a given city
+Google maps will display the city on a map and add markers for each of the returned restuarants
+The table below the map will provide the user with:
+-The name
+-The type of cuisines served
+-Overall Rating
+-More Info
 
-//////////////////////////////////////////////////////////////////////////////////////
+When the more info button is selected, a modal will pop up and give the user access to:
+-A photo from the restaurant
+-The phone number
+-The address
+-A list of the 5 most relevant reviews available
 
-Ticket Master
+----Events----
+The Ticketmaster API will return a list of events in the city captured from the form, in the date ranges 
+that have been given by the user
+Google Maps will redraw the markers on the map to show the user where these events are taking place
+The table below the nap will provide the user with:
+-The name of the event
+-The date of the event
+-The time of the event
+-More Info
 
-API KEY
-YlU1Z6st1DDtdKQahLrwevvAJXCU3LXr
+When the more info button is selected, a modal will pop up and give the user access to:
+The name of the team/performer
+-A picture of this team/person/group
+-The name of the Venue of the event
+-A picture of the venue(if provided by API)
+-A link that will land the user on the page to purchase tickets for the event
 
-//////////////////////////////////////////////////////////////////////////////////////
+----Breweries----
+OpenBreweryDB provides the list of breweries determined by the users input
+Google maps will redraw markers for these entities
+The table below the map will provide the user with:
+-The name of the breweries
+-The type of brewery
+-The address of the brewery
+-More info
 
-Open Weather (can get daily weather and forecast up to 14 days)
+When the More Info button is selected, the Untappd API will search for the brewery by Name
+If a brewery is returned from the API call the user will be provided with:
+-The Brewery's Logo
+-A phone number
+-The Address
+-A table that displays the breweries current tap list with information on each beer for the user
 
-community-open-weather-map.p.rapidapi.com
+--------------
 
-8bf491496emshbb8ddd4d54bd8cep1721d9jsn47b883384576
+This application is deployed at: jastring1.github.io/VacaBuddy
 
-///////////////////////////////////////////////////////////////////////////////////////
 
-Bands in Town
 
-?app_id=codingbootcamp"
-
-//////////////////////////////////////////////////////////////////////////////////////
