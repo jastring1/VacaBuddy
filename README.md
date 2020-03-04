@@ -6,7 +6,7 @@ Tripp Stringfield
 
 Vacabuddy is a web application that allows a user to search for information based on Cities
 
-##This application is written with:
+## Technologies
 
 - HTML5
 - BootStrap4
@@ -16,13 +16,13 @@ Vacabuddy is a web application that allows a user to search for information base
 
 ## Functionality
 
-### The application propmts a user for 3 Input fields:
+#### The application propmts a user for 3 Input fields:
 
 - City
 - Date of Arrival
 - Date of Departure
 
-### Once the user completes the form they have 3 search areas to explore:
+#### Once the user completes the form they have 3 search areas to explore:
 
 - Restaurants
 - Events
