@@ -22,6 +22,8 @@ Vacabuddy is a web application that allows a user to search for information base
 - Date of Arrival
 - Date of Departure
 
+![VacaBuddy Landing](/Images/landing.JPG)
+
 #### Once the user completes the form they have 3 search areas to explore:
 
 - Restaurants
@@ -39,12 +41,16 @@ The table below the map will provide the user with:
 - Overall Rating
 - More Info
 
+![VacaBuddy Restaurant](/Images/rest1.JPG)
+
 When the more info button is selected, a modal will pop up and give the user access to:
 
 - A photo from the restaurant
 - The phone number
 - The address
 - A list of the 5 most relevant reviews available
+
+![VacaBuddy Restaurant2](/Images/rest2.JPG)
 
 #### Events
 
@@ -64,6 +70,8 @@ The name of the team/performer
 - A picture of the venue(if provided by API)
 - A link that will land the user on the page to purchase tickets for the event
 
+![VacaBuddy Ticketmaster](/Images/ticket.JPG)
+
 #### Breweries
 
 OpenBreweryDB provides the list of breweries determined by the users input
@@ -82,6 +90,8 @@ If a brewery is returned from the API call the user will be provided with:
 - A phone number
 - The Address
 - A table that displays the breweries current tap list with information on each beer for the user
+
+![VacaBuddy Brewery](/Images/brew.JPG)
 
 
 
